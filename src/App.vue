@@ -7,7 +7,10 @@
     <router-view />
   </div>
 </template>
-
+<script>
+let a = "kdjg";
+console.log(a);
+</script>
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
