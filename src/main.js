@@ -7,7 +7,7 @@ import store from './store'
 // import 'src/assets/css/inde x.scss'
 
 //全局引入按需引入UI库 vant
-import '@/plugins/vant'
+import 'plugins/vant'
 Vue.config.productionTip = false
 
 new Vue({

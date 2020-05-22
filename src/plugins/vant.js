@@ -2,6 +2,8 @@
 import Vue from 'vue'
 import {Button, List, Cell, Icon} from 'vant'
 import {NavBar, Tab, Tabs} from 'vant'
+import 'vant/lib/index.less'
+
 Vue.use(Button)
 Vue.use(Cell)
 Vue.use(List)

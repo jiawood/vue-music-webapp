@@ -1,7 +1,7 @@
 <template>
   <van-nav-bar>
     <template #left>
-      <van-icon name="menu" size="18" />
+      <van-icon name="menu" />
     </template>
     <template #title>
       <van-tabs v-model="active" line-width="0">
@@ -12,7 +12,7 @@
       </van-tabs>
     </template>
     <template #right>
-      <van-icon name="search" size="18" />
+      <van-icon name="search" />
     </template>
   </van-nav-bar>
 </template>
@@ -30,6 +30,6 @@ export default {
 
 <style lang="scss" scoped>
 ::v-deep .van-tab--active span {
-  font-size: 30px;
+  font-size: 40px;
 }
 </style>
