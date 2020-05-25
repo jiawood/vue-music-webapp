@@ -1,30 +1,55 @@
-// import Vue from "vue";
-// import VueRouter from "vue-router";
-// import Home from "../views/Home.vue";
+import Vue from 'vue'
+import vueRouter from 'vue-router'
+import VueRouter from 'vue-router'
 
-// Vue.use(VueRouter);
+const originalPush = vueRouter.prototype.push
+vueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
 
-// const routes = [
-//   {
-//     path: "/",
-//     name: "Home",
-//     component: Home
-//   },
-//   {
-//     path: "/about",
-//     name: "About",
-//     // route level code-splitting
-//     // this generates a separate chunk (about.[hash].js) for this route
-//     // which is lazy-loaded when the route is visited.
-//     component: () =>
-//       import(/* webpackChunkName: "about" */ "../views/About.vue")
-//   }
-// ];
+Vue.use(VueRouter)
 
-// const router = new VueRouter({
-//   mode: "history",
-//   base: process.env.BASE_URL,
-//   routes
-// });
+const menu = () => import('views/Menu/Menu.vue')
+const profile = () => import('views/Profile/Profile.vue')
+const find = () => import('views/Find/Find.vue')
+const cloud_village = () => import('views/CloudVillage/CloudVillage.vue')
+const video = () => import('views/Video/Video.vue')
+const search = () => import('views/Search/Search.vue')
 
-// export default router;
+const routes = [
+  {
+    path: '',
+    redirect: '/find'
+  },
+  {
+    path: '/find',
+    component: find
+  },
+  {
+    path: '/menu',
+    component: menu
+  },
+  {
+    path: '/profile',
+    component: profile
+  },
+  {
+    path: '/cloud_village',
+    component: cloud_village
+  },
+  {
+    path: '/video',
+    component: video
+  },
+  {
+    path: '/search',
+    component: search
+  }
+]
+
+const router = new vueRouter({
+  routes,
+  mode: 'history'
+})
+
+export default router

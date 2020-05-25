@@ -1,10 +1,9 @@
 <template>
   <div id="app" class="app">
     <MainTabBar></MainTabBar>
-    <!-- <keep-alive>
+    <keep-alive>
       <router-view></router-view>
-    </keep-alive> -->
-    <!-- maintabar -->
+    </keep-alive>
   </div>
 </template>
 
