@@ -12,3 +12,9 @@ Vue.use(Tabs)
 Vue.use(NavBar)
 Vue.use(Icon)
 Vue.use(Popup)
+
+//轮播图
+import {Swipe, SwipeItem} from 'vant'
+
+Vue.use(Swipe)
+Vue.use(SwipeItem)

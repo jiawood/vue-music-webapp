@@ -1,10 +1,10 @@
 {
-  "printWidth": 120,
+  "printWidth": 80,
   "tabWidth": 2,
   "singleQuote": true,
   "trailingComma": "none",
   "semi": false,
-  "wrap_line_length": 120,
+  "wrap_line_length": 80,
   "wrap_attributes": "auto",
   "proseWrap": "always",
   "arrowParens": "avoid",

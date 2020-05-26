@@ -1,5 +1,9 @@
 <template>
-  <van-nav-bar @click-left="onClickLeft" @click-right="onClickRight">
+  <van-nav-bar
+    @click-left="onClickLeft"
+    @click-right="onClickRight"
+    border="border"
+  >
     <template #left>
       <van-icon name="wap-nav" size="25px" color="rgb(100,100,100)" />
     </template>
@@ -26,7 +30,8 @@ export default {
     return {
       path: ['/profile', '/find', '/cloud_village', '/video'],
       active: 1,
-      show: false
+      show: false,
+      border: false
     }
   },
   methods: {

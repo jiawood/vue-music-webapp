@@ -13,6 +13,7 @@ module.exports = {
       .set('router', resolve('src/router'))
       .set('utils', resolve('src/utils'))
       .set('views', resolve('src/views'))
+      .set('api', resolve('src/api'))
   },
   css: {
     loaderOptions: {
