@@ -16,10 +16,6 @@ export default {
       default() {
         return []
       }
-    },
-    indicatorColor: {
-      type: String,
-      default: 'red'
     }
   }
 }

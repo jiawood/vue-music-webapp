@@ -16,6 +16,14 @@ const cloud_village = () => import('views/CloudVillage/CloudVillage.vue')
 const video = () => import('views/Video/Video.vue')
 const search = () => import('views/Search/Search.vue')
 
+//find 下面的子页面
+const recommend = () => import('views/Find/childViews/Recommend.vue') //每日推荐
+const song_lists = () => import('views/Find/childViews/SongLists.vue') //歌单
+const rank = () => import('views/Find/childViews/Rank.vue') //排行榜
+const radio = () => import('views/Find/childViews/Radio.vue') //电台
+const live = () => import('views/Find/childViews/Live.vue') // 直播
+const album = () => import('views/Find/childViews/Album.vue') //数字专辑
+
 const routes = [
   {
     path: '',
@@ -44,6 +52,30 @@ const routes = [
   {
     path: '/search',
     component: search
+  },
+  {
+    path: '/recommend',
+    component: recommend
+  },
+  {
+    path: '/song_lists',
+    component: song_lists
+  },
+  {
+    path: '/rank',
+    component: rank
+  },
+  {
+    path: '/radio',
+    component: radio
+  },
+  {
+    path: '/live',
+    component: live
+  },
+  {
+    path: '/album',
+    component: album
   }
 ]
 

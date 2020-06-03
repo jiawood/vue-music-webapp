@@ -18,4 +18,8 @@ export default {
 }
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.app {
+  width: 360px;
+}
+</style>

@@ -1,17 +1,20 @@
 <template>
   <div id="find">
     <find-swiper :banner="banner"></find-swiper>
+    <find-lists />
   </div>
 </template>
 
 <script>
 import FindSwiper from './childFinds/FindSwiper'
+import FindLists from './childFinds/FindLists'
 
 import {getFindBanner} from 'api/find'
 export default {
   name: 'Find',
   components: {
-    FindSwiper
+    FindSwiper,
+    FindLists
   },
   data() {
     return {
