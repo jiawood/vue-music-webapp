@@ -59,6 +59,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
 .find-lists {
   // float: left;
   width: 360px;
