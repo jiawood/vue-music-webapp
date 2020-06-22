@@ -35,8 +35,8 @@ export default {
   },
   methods: {
     lessMessage(str) {
-      if (str.length >= 20) {
-        return str.slice(0, 20) + '...'
+      if (str.length >= 18) {
+        return str.slice(0, 18) + '...'
       }
       return str
     },
@@ -77,7 +77,7 @@ export default {
   line-height: 30px;
 }
 .content {
-  height: 170px;
+  height: 150px;
   width: 345px;
   display: flex;
   overflow-x: auto;
@@ -85,12 +85,12 @@ export default {
   .container {
     flex-shrink: 0;
     width: 650px;
-    height: 170px;
+    height: 150px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     .item {
-      height: 170px;
+      height: 150px;
       width: 100px;
       position: relative;
       .playcount {

@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="content">
-      <slot name="content"> </slot>
+      <slot name="content"></slot>
     </div>
   </div>
 </template>
@@ -27,7 +27,7 @@ export default {
 
 <style lang="scss" scoped>
 .songlists {
-  height: 200px;
+  height: 180px;
   width: 360px;
   padding: 0 0 0 15px;
   box-sizing: border-box;

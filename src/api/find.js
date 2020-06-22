@@ -25,3 +25,11 @@ export function getRecommendNight() {
     url: '/top/playlist?limit=6&order=hot&cat=夜晚'
   })
 }
+
+
+//不需要登陆的推荐音乐
+export function recommendMusicData() {
+  return request({
+    url: '/personalized/newsong'
+  })
+}
