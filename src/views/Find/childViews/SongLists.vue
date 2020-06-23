@@ -2,7 +2,7 @@
 <template>
   <div class="song-lists">
     <div class="header">
-      <div class="icon">
+      <div class="icon" @click="goback()">
         <img :src="pImg" alt="" />
       </div>
       <div class="title">
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import SongListItem from 'components/find/SongListItem'
+import SongListItem from 'components/SongListItem'
 import {recommendListNo} from 'api/find'
 
 export default {
@@ -31,6 +31,11 @@ export default {
     return {
       pImg: require('assets/icons/left-arrow.svg'),
       allSongList: []
+    }
+  },
+  methods: {
+    goback() {
+      this.$router.go(-1)
     }
   },
   created() {
@@ -45,12 +50,12 @@ export default {
 .song-lists {
   width: 360px;
   padding: 0 15px;
+  box-sizing: border-box;
   .header {
-    height: 30px;
+    height: 46px;
     .icon {
       float: left;
-      left: 0;
-      top: 0;
+      margin-top: 8px;
       img {
         height: 30px;
         width: 30px;
@@ -58,11 +63,17 @@ export default {
     }
     .title {
       float: left;
-      left: 0;
+      margin: 12px 0 0 10px;
       span {
         font-size: 16px;
       }
     }
+  }
+  .content {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
   }
 }
 </style>

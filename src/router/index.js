@@ -9,6 +9,8 @@ vueRouter.prototype.push = function push(location) {
 
 Vue.use(VueRouter)
 
+const home = () => import('views/Home.vue')
+
 const menu = () => import('views/Menu/Menu.vue')
 const profile = () => import('views/Profile/Profile.vue')
 const find = () => import('views/Find/Find.vue')
@@ -27,32 +29,43 @@ const album = () => import('views/Find/childViews/Album.vue') //数字专辑
 const routes = [
   {
     path: '',
-    redirect: '/find'
+    component: home,
+    redirect: '/home'
   },
+
   {
-    path: '/find',
-    component: find
+    path: '/home',
+    component: home,
+    children: [
+      {
+        path: '/find',
+        component: find
+      },
+      {
+        path: '/profile',
+        component: profile
+      },
+      {
+        path: '/cloud_village',
+        component: cloud_village
+      },
+      {
+        path: '/video',
+        component: video
+      }
+    ]
   },
+
   {
     path: '/menu',
     component: menu
   },
-  {
-    path: '/profile',
-    component: profile
-  },
-  {
-    path: '/cloud_village',
-    component: cloud_village
-  },
-  {
-    path: '/video',
-    component: video
-  },
+
   {
     path: '/search',
     component: search
   },
+
   {
     path: '/recommend',
     component: recommend
