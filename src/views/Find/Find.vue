@@ -13,8 +13,8 @@
 <script>
 import FindSwiper from './childFinds/FindSwiper'
 import FindLists from './childFinds/FindLists'
-import FindRecommend from 'components/FindRecommend'
-import FindRecommendMusic from 'components/FindRecommendMusic'
+import FindRecommend from 'components/find/FindRecommend'
+import FindRecommendMusic from 'components/find/FindRecommendMusic'
 
 import {getFindBanner, getRecommend, recommendMusicData} from 'api/find'
 export default {

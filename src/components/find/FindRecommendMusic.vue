@@ -100,7 +100,7 @@ export default {
       console.log('未开发')
     },
     playSong(song) {
-      console.log('播放' + song)
+      console.log(song)
     }
   }
 }
@@ -194,7 +194,7 @@ export default {
               display: flex;
               flex-direction: column;
               justify-content: center;
-              .icon{
+              .icon {
                 height: 25px;
                 width: 25px;
                 border: 1px solid #909090;
@@ -203,7 +203,7 @@ export default {
                 justify-content: center;
                 align-items: center;
                 // align-self: center;
-                img{
+                img {
                   height: 8px;
                   width: 8px;
                 }

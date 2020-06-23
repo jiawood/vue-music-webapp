@@ -33,3 +33,11 @@ export function recommendMusicData() {
     url: '/personalized/newsong'
   })
 }
+
+//不需要登录的推荐歌单
+
+export function recommendListNo() {
+  return request({
+    url: '/personalized'
+  })
+}
