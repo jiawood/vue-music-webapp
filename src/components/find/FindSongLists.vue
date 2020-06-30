@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: 'SongLists',
+  name: 'FindSongLists',
   methods: {
     clickItem() {
       this.$router.push('/song_lists')

@@ -41,3 +41,26 @@ export function recommendListNo() {
     url: '/personalized'
   })
 }
+
+//详细的歌单信息(包含歌单里面的歌曲)
+export function playlistDetail(id) {
+  return request({
+    url: '/playlist/detail?',
+    params: {
+      id: id
+    }
+  })
+}
+
+
+//暂时先不做这个功能
+//歌曲详情页，主要是通过这个获取到歌曲的图片
+//ids 是一个歌曲列表的字符串  id,id,id
+export function songDetail(ids) {
+  return request({
+    url: '/song/detail',
+    params: {
+      ids: ids
+    }
+  })
+}

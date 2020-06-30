@@ -51,8 +51,14 @@ export default {
   width: 360px;
   padding: 0 15px;
   box-sizing: border-box;
+  position: relative;
   .header {
+    top: 0;
+    left: 0;
+    position: fixed;
     height: 46px;
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.5);
     .icon {
       float: left;
       margin-top: 8px;
@@ -70,6 +76,7 @@ export default {
     }
   }
   .content {
+    margin-top: 46px;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;

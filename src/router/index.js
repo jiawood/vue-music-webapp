@@ -26,11 +26,16 @@ const radio = () => import('views/Find/childViews/Radio.vue') //电台
 const live = () => import('views/Find/childViews/Live.vue') // 直播
 const album = () => import('views/Find/childViews/Album.vue') //数字专辑
 
+
+//详细的歌曲列表 song_lists下的子页面,放在views 的PlayList下面
+const play_list = () => import('views/PlayList/PlayList.vue')
+
+
 const routes = [
   {
     path: '',
     component: home,
-    redirect: '/home'
+    redirect: '/find'
   },
 
   {
@@ -73,6 +78,12 @@ const routes = [
   {
     path: '/song_lists',
     component: song_lists
+  },
+  //属于歌单列表的子页面
+  {
+    path: '/play_list/:play_list_id',
+    name: 'PlayList',
+    component: play_list
   },
   {
     path: '/rank',

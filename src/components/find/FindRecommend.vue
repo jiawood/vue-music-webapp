@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import SongLists from './SongLists'
+import SongLists from './FindSongLists'
 export default {
   name: 'FindRecommend',
   components: {
