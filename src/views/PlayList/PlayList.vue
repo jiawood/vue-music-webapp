@@ -8,10 +8,10 @@
         <div class="title">
           <span>歌单</span>
         </div>
-        <div class="search">
+        <div class="search" @click="toast(message)">
           <img :src="search" alt="" />
         </div>
-        <div class="more">
+        <div class="more" @click="toast(message)">
           <img :src="threedots" alt="" />
         </div>
       </div>
@@ -97,6 +97,7 @@
 
 <script>
 import {playlistDetail} from 'api/find'
+import {Toast} from 'vant'
 export default {
   name: 'PlayList',
   data() {
@@ -119,6 +120,9 @@ export default {
   methods: {
     goBack() {
       this.$router.go(-1)
+    },
+    toast(message) {
+      Toast(message)
     }
   },
   computed: {
