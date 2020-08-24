@@ -1,24 +1,26 @@
 const mutation = {
   //设置播放器显示
-  SETSHOWPING(state, showPlayer){
+  SETSHOWPLAYER(state, showPlayer) {
     state.showPlayer = showPlayer
   },
   //播放器是否全屏显示
-  SETFULLSCREEN(state, fullScreen){
+  SETFULLSCREEN(state, fullScreen) {
     state.fullScreen = fullScreen
   },
   //设置指向播放列表第几首歌
-  SETCURRENTINDEX(state, currentIndex){
+  SETCURRENTINDEX(state, currentIndex) {
     state.currentIndex = currentIndex
   },
   //设置播放列表
-  SETPLAYLIST(state, playList){
+  SETPLAYLIST(state, playList) {
     let res = []
-    if(Array.isArray(playList)) {
+    if (Array.isArray(playList)) {
       state.playList = playList
-    }else{
+    } else {
       const findIndex = state.playList.findIndex(item => item.id == playList.id)
-      res = state.slice(findIndex)
+      res = state.playList.slice(findIndex)
+      let font = state.playList.slice(0, findIndex)
+      res = res.concat(font)
       state.playList = res
     }
   },

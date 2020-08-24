@@ -4,7 +4,7 @@
   "singleQuote": true,
   "trailingComma": "none",
   "semi": false,
-  "wrap_line_length": 40,
+  "wrap_line_length": 120,
   "wrap_attributes": "auto",
   "proseWrap": "always",
   "arrowParens": "avoid",

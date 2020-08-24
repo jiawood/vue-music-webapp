@@ -30,6 +30,9 @@ const album = () => import('views/Find/childViews/Album.vue') //数字专辑
 //详细的歌曲列表 song_lists下的子页面,放在views 的PlayList下面
 const play_list = () => import('views/PlayList/PlayList.vue')
 
+//player 播放列表
+const player = () => import('views/Player/Player.vue')
+
 
 const routes = [
   {
@@ -100,6 +103,11 @@ const routes = [
   {
     path: '/album',
     component: album
+  },
+  //播放页面
+  {
+    path: '/player',
+    component: player
   }
 ]
 

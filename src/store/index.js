@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 
 import state from './state.js'
 import mutations from './mutations.js'
-import getters from './getters.js'
+import getters from './getter.js'
 import actions from './actions.js'
 
 Vue.use(Vuex)

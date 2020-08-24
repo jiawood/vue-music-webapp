@@ -7,7 +7,7 @@ const action = {
     commit('SETCURRENTINDEX', 0)
     commit('SETFULLSCREEN', true)
     commit('SETPLAYING', true)
-    commit('SETSHOWPLAYING', true)
+    commit('SETSHOWPLAYER', true)
     router.push('/Player')
   }
 }

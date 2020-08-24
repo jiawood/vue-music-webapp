@@ -1,4 +1,4 @@
-import state from './state'
+
 
 const getter = {
   fullScreen: state => state.fullScreen,

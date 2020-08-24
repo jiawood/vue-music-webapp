@@ -55,11 +55,11 @@
     </div>
     <div class="songs">
       <div class="song-header">
-        <div class="play-icon">
+        <div class="play-icon" @click="playAll">
           <img :src="play" alt="" />
         </div>
-        <div class="play-all">
-          <span>{{ playAll }}</span>
+        <div class="play-all" @click="playAll">
+          <span>{{ playAllShow }}</span>
         </div>
         <div class="fav">
           <span>{{ fav }}</span>
@@ -70,7 +70,7 @@
         v-for="(item, index) in playListDetail.tracks"
         :key="index"
       >
-        <div class="list">
+        <div class="list" @click="playSong(item)">
           <div class="index">
             <span>{{ index + 1 }}</span>
           </div>
@@ -123,20 +123,30 @@ export default {
     },
     toast(message) {
       Toast(message)
+    },
+    playAll() {
+      if (this.playListDetail.tracks.length > 0){
+        this.$store.dispatch('setPlayShow', this.playListDetail.tracks)
+      }
+    },
+    playSong(song) {
+      this.$store.dispatch('setPlayShow', song)
     }
   },
   computed: {
-    playAll() {
+    playAllShow() {
       return 'Play all(' + this.playListDetail.trackCount + ' tracks)'
     },
     fav() {
       return `+ Fav(${this.playListDetail.subscribedCount})`
     }
+
   },
   created() {
     playlistDetail(this.$route.params.play_list_id).then(res => {
       if (res.data.code === 200) {
         this.playListDetail = res.data.playlist
+        this.$store.commit('SETPLAYLIST', res.data.playlist.tracks)
         this.creator = res.data.playlist.creator
       }
     })
@@ -145,6 +155,7 @@ export default {
     playlistDetail(this.$route.params.play_list_id).then(res => {
       if (res.data.code === 200) {
         this.playListDetail = res.data.playlist
+        this.$store.commit('SETPLAYLIST', res.data.playlist.tracks)
         this.creator = res.data.playlist.creator
       }
     })
