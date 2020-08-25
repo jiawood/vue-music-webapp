@@ -15,6 +15,9 @@ module.exports = {
       .set('views', resolve('src/views'))
       .set('api', resolve('src/api'))
   },
+  configureWebpack: {
+    devtool: 'source-map'
+  },
   css: {
     loaderOptions: {
       less: {

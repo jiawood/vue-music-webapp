@@ -64,3 +64,14 @@ export function songDetail(ids) {
     }
   })
 }
+
+
+//获取音乐的MP3文件
+export function getSongUrl(id) {
+  return request({
+    url: '/song/url?',
+    params: {
+      id: id
+    }
+  })
+}
