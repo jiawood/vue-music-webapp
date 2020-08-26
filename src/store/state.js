@@ -1,7 +1,7 @@
 const state = {
   //播放器
-  showPlayer: true,
-  fullScreen: true,
+  showPlayer: false,
+  fullScreen: false,
   currentIndex: 0,
   playing: false,
   playList: [

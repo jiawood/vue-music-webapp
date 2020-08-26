@@ -3,13 +3,17 @@
     <keep-alive>
       <router-view></router-view>
     </keep-alive>
+    <player></player>
   </div>
 </template>
 
 <script>
-
+import Player from 'views/Player/Player'
 export default {
-  name: 'App'
+  name: 'App',
+  components:{
+    Player
+  }
   // components: {
   //   MainTabBar
   // }

@@ -31,7 +31,7 @@ const album = () => import('views/Find/childViews/Album.vue') //数字专辑
 const play_list = () => import('views/PlayList/PlayList.vue')
 
 //player 播放列表
-const player = () => import('views/Player/Player.vue')
+// const player = () => import('views/Player/Player.vue')
 
 
 const routes = [
@@ -105,10 +105,10 @@ const routes = [
     component: album
   },
   //播放页面
-  {
-    path: '/player',
-    component: player
-  }
+  // {
+  //   path: '/player',
+  //   component: player
+  // }
 ]
 
 const router = new vueRouter({
