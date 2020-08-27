@@ -1,6 +1,6 @@
 <template>
   <div class="player" v-show="showPlayer">
-    <transition name="full" >
+    <transition name="full">
       <div class="full" v-show="fullScreen">
         <div class="bgimg">
           <img
@@ -28,13 +28,30 @@
             - {{ playList[currentIndex].al && playList[currentIndex].al.name }}
           </div>
         </div>
-        <div class="middle">
-          <div class="circle">
+        <div class="middle" @click="toggleLyric">
+          <div class="circle" v-show="!showLyric">
             <img
               :src="playList[currentIndex].al.picUrl"
               alt=""
               :class="playing ? 'isPlay' : 'isPaused'"
             />
+          </div>
+          <div class="lyric" v-show="showLyric">
+            <div
+              class="lyric-text"
+              ref="lyricText"
+              v-if="currentLyric"
+              @scroll="handlerLyricScroll"
+            >
+              <p
+                ref="lyricLine"
+                v-for="(item, index) in currentLyric.lines"
+                :key="index"
+                :class="{active: currentLine === index}"
+              >
+                {{ item.txt }}
+              </p>
+            </div>
           </div>
         </div>
         <div class="progress">
@@ -146,7 +163,8 @@
 import {Toast} from 'vant'
 import {mapState, mapMutations} from 'vuex'
 import vProgress from 'components/Progress.vue'
-import {getSongUrl} from 'api/find'
+import {getSongUrl, getLyric} from 'api/find'
+import Lyric from 'utils/parse-lyric.js'
 
 export default {
   name: 'Player',
@@ -164,6 +182,7 @@ export default {
       currentLine: 0,
       lyricText: null,
       lyricScroll: 0,
+      currentLyric: null,
       scrollTimer: null,
       showPlayList: false,
       itemId: 0,
@@ -190,11 +209,6 @@ export default {
       Toast(message)
     },
 
-    //切换歌词
-    toggleLyric() {
-      this.showLyric = !this.showLyric
-    },
-
     canplay() {
       let playP = this.$refs.audio.play()
       if (playP !== undefined) {
@@ -209,6 +223,7 @@ export default {
     changeTime(currentTime, isMove) {
       this.isMove = isMove
       this.$refs.audio.currentTime = currentTime
+      this.currentLyric && this.currentLyric.seek(this.currentTime * 1000)
     },
     moveProgressBtn(changeTime, isMove) {
       this.currentTime = changeTime
@@ -218,6 +233,7 @@ export default {
       if (!this.isMove) {
         this.currentTime = this.$refs.audio.currentTime
       }
+      this.currentLyric && this.currentLyric.seek(this.currentTime * 1000)
     },
 
     //audio 相关的api
@@ -299,6 +315,78 @@ export default {
         this.$router.push('/Player')
       }
       this.$store.commit('SETFULLSCREEN', !this.fullScreen)
+      this.currentLyric.togglePlay()
+    },
+
+    //歌词解析相关
+    //切换歌词
+    toggleLyric() {
+      this.showLyric = !this.showLyric
+    },
+
+    //setlyric获取歌词并将歌词传入Lyric对象
+    setLyric(id) {
+      if (this.currentLyric) {
+        // console.log('清除旧的对象');
+        this.currentLyric.stop()
+        this.currentLyric = null
+        // console.log('currentLyric', this.currentLyric)
+      }
+      getLyric(id).then(res => {
+        // console.log(res);
+        let ly = ''
+        if (res.data.lrc && res.data.lrc.lyric) {
+          ly = res.data.lrc.lyric
+        } else {
+          ly = '[00:00.00]纯音乐,请欣赏!'
+        }
+        this.currentLyric = new Lyric(ly, this.handlerLyric)
+        if (this.currentLyric.lines.length === 0) {
+          this.currentLyric = new Lyric(
+            '[00:00.00]纯音乐,请欣赏!',
+            this.handlerLyric
+          )
+          this.nowLyric = '纯音乐,请欣赏!'
+          // console.log('---空的')
+        } else {
+          this.nowLyric = this.currentLyric.lines[0].txt
+        }
+        // console.log('播放状态:', this.playing)
+        if (this.playing) {
+          this.currentLyric.play()
+        }
+        // console.log('---', this.currentLyric);
+      })
+    },
+    //handlerLyric歌词处理
+    handlerLyric({lineNum, txt}) {
+      this.currentLine = lineNum
+      this.nowLyric = txt
+      const halfH = 160
+      if (lineNum < 5) {
+        // console.log('不用滚动')
+        this.lyricScroll = 0
+      } else {
+        // this.$refs.lyricLine[lineNum - 5]
+        if (this.$refs.lyricLine[lineNum]) {
+          this.lyricScroll = this.$refs.lyricLine[lineNum].offsetTop - halfH
+          this.$refs.lyricText.scrollTo({
+            top: this.$refs.lyricLine[lineNum].offsetTop - halfH,
+            behavior: 'smooth'
+          })
+        }
+      }
+    },
+    //处理歌词滚动
+    handlerLyricScroll() {
+      this.scrollTimer && clearTimeout(this.scrollTimer)
+      this.scrollTimer = setTimeout(() => {
+        // console.log('scollback')
+        this.$refs.lyricText.scrollTo({
+          top: this.lyricScroll,
+          behavior: 'smooth'
+        })
+      }, 300)
     }
   },
 
@@ -312,6 +400,7 @@ export default {
     currentIndex(newV) {
       this.getUrl(this.playList[newV].id)
       this.itemId = this.playList[newV].id
+      this.setLyric(this.playList[newV].id)
     },
     $route(to, from) {
       // 没点左上角的退出按钮, 手机直接操作返回, 或者浏览器直接返回时 隐藏播放界面
@@ -375,6 +464,7 @@ export default {
         box-sizing: border-box;
         height: 40px;
         width: 100%;
+        padding: 0 50px;
         font-size: 20px;
         line-height: 40px;
         font-weight: 700;
@@ -385,6 +475,7 @@ export default {
         box-sizing: border-box;
         margin-top: -10px;
         text-align: center;
+        padding: 0 50px;
         height: 30px;
         width: 100%;
         font-size: 16px;
@@ -429,6 +520,38 @@ export default {
         }
         .isPaused {
           animation-play-state: paused;
+        }
+      }
+      .lyric {
+        height: 400px;
+        width: 360px;
+        padding: 0 30px;
+        box-sizing: border-box;
+        overflow: scroll;
+        .lyric-text {
+          // display: flex;
+          // flex-direction: column;
+          // align-self: center;
+          text-align: center;
+          overflow: auto;
+          height: 400px;
+          &::-webkit-scrollbar {
+            display: none;
+          }
+          p {
+            height: 40px;
+            line-height: 40px;
+            font-size: 15px;
+            margin: 0;
+            color: rgb(188, 188, 188);
+            width: 300px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+          }
+          .active {
+            color: white;
+          }
         }
       }
     }
