@@ -21,6 +21,7 @@ export default class Lyric {
     this.handler = hanlder
     this.state = STATE_PAUSE
     this.curLine = 0
+    this.timer = 0
 
     this._init()
   }
@@ -33,10 +34,8 @@ export default class Lyric {
 
   // _initTag() {
   //   for (let tag in tagRegMap) {
-  //     const matches = this.lrc.match(
-  //       new RegExp(`\\[${tagRegMap[tag]}:([^\\]]*)]`, 'i')
-  //     )
-  //     this.tags[tag] = (matches && matches[1]) || ''
+  //     const matches = this.lrc.match(new RegExp(`\\[${tagRegMap[tag]}:([^\\]]*)]`, 'i'))
+  //     this.tags[tag] = matches && matches[1] || ''
   //   }
   // }
 
@@ -101,7 +100,7 @@ export default class Lyric {
     }, delay)
   }
 
-  play(startTime = 0, skipLast) {
+  play(startTime = 0) {
     if (!this.lines.length) {
       return
     }
@@ -110,9 +109,9 @@ export default class Lyric {
     this.curNum = this._findCurNum(startTime)
     this.startStamp = +new Date() - startTime
 
-    if (!skipLast) {
-      this._callHandler(this.curNum - 1)
-    }
+    // if (!skipLast) {
+    //   this._callHandler(this.curNum - 1)
+    // }
 
     if (this.curNum < this.lines.length) {
       clearTimeout(this.timer)

@@ -233,7 +233,11 @@ export default {
       if (!this.isMove) {
         this.currentTime = this.$refs.audio.currentTime
       }
-      this.currentLyric && this.currentLyric.seek(this.currentTime * 1000)
+      console.log(1)
+      if(this.playing){
+        this.currentLyric && this.currentLyric.seek(this.currentTime * 1000)
+
+      }
     },
 
     //audio 相关的api
@@ -277,6 +281,9 @@ export default {
     clickPlayStatus() {
       this.playing ? this.$refs.audio.pause() : this.$refs.audio.play()
       this.$store.commit('SETPLAYING', !this.playing)
+      this.currentLyric.togglePlay()
+      // debugger
+      // console.log(this)
     },
     nextSong() {
       let currentIndex = this.currentIndex
@@ -315,7 +322,6 @@ export default {
         this.$router.push('/Player')
       }
       this.$store.commit('SETFULLSCREEN', !this.fullScreen)
-      this.currentLyric.togglePlay()
     },
 
     //歌词解析相关
@@ -352,9 +358,9 @@ export default {
           this.nowLyric = this.currentLyric.lines[0].txt
         }
         // console.log('播放状态:', this.playing)
-        if (this.playing) {
-          this.currentLyric.play()
-        }
+        // if (this.playing) {
+        //   this.currentLyric.play()
+        // }
         // console.log('---', this.currentLyric);
       })
     },
@@ -386,7 +392,7 @@ export default {
           top: this.lyricScroll,
           behavior: 'smooth'
         })
-      }, 300)
+      }, 30)
     }
   },
 
@@ -415,6 +421,10 @@ export default {
           this.$store.commit('SETFULLSCREEN', !this.fullScreen)
         }
       }
+    },
+    playList() {
+      this.getUrl(this.playList[this.currentIndex].id)
+      this.setLyric(this.playList[this.currentIndex].id)
     }
   }
 }
@@ -422,13 +432,13 @@ export default {
 
 <style lang="scss" scoped>
 .player {
-  height: 640px;
-  width: 360px;
-  position: relative;
-  background-color: rgb(111, 111, 111);
-  overflow: hidden;
-  z-index: 10;
   .full {
+    height: 640px;
+    width: 360px;
+    position: relative;
+    background-color: rgb(111, 111, 111);
+    overflow: hidden;
+    z-index: 10;
     .bgimg {
       position: absolute;
       top: 0;
@@ -557,7 +567,7 @@ export default {
     }
     .progress {
       position: relative;
-      z-index: 20;
+      z-index: 1000;
       height: 40px;
       width: 360px;
       margin-top: 20px;

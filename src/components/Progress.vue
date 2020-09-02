@@ -63,13 +63,13 @@ export default {
       const progressBox = this.$refs.progressBox
       const progressBtn = this.$refs.progressBtn
       const progressLine = this.$refs.progressLine
-      const boxLeft = progressBox.getBoundingClientRect().left
+      const boxLeft = progressBox.offsetLeft
       const btnW = progressBtn.offsetWidth
 
       progressBox.addEventListener(
         'click',
         function(event) {
-          const progressLineW = event.pageX - boxLeft
+          const progressLineW = event.pageX - progressBox.offsetLeft
           if (progressLineW >= 0 && progressLineW <= progressBox.offsetWidth) {
             progressLine.style.width = progressLineW + 'px'
             progressBtn.style.left = progressLineW - btnW / 2 + 'px'

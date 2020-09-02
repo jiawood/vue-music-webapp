@@ -15,7 +15,7 @@
         <div class="text">{{ icon.text }}</div>
       </div>
     </div>
-    <div class="day">{{ this.getDay() }}</div>
+    <div class="day">{{ today }}</div>
   </div>
 </template>
 
@@ -24,6 +24,7 @@ export default {
   name: 'FindLists',
   data() {
     return {
+      today: 0,
       icons: [
         {
           src: require('assets/icons/calendar.svg'),
@@ -54,6 +55,9 @@ export default {
       let now = new Date()
       return now.getDay()
     }
+  },
+  created() {
+    this.today = this.getDay()
   }
 }
 </script>
