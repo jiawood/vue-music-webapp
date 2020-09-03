@@ -86,3 +86,11 @@ export function getLyric(id) {
     }
   })
 }
+
+
+//获取排行榜数据
+export function getRankIds() {
+  return request({
+    url: '/toplist'
+  })
+}

@@ -53,7 +53,7 @@ export default {
     },
     getDay() {
       let now = new Date()
-      return now.getDay()
+      return now.getDate()
     }
   },
   created() {
