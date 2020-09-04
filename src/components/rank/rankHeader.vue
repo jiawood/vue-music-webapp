@@ -13,7 +13,7 @@ export default {
 <style lang="scss" scoped>
 .rank-header {
   height: 54px;
-  padding: 24px 10px 10px 10px;
+  padding: 24px 10px 10px 0px;
   box-sizing: border-box;
   span {
     line-height: 20px;

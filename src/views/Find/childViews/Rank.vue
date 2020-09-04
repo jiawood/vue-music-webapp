@@ -1,5 +1,6 @@
 <template>
   <div class="rank">
+    <go-back name="排行榜"></go-back>
     <rank-header headerName="榜单推荐"></rank-header>
     <div class="top">
       <div v-for="item in topList" :key="item.id">
@@ -32,6 +33,7 @@
 
 <script>
 import {getRankIds, playlistDetail} from 'api/find'
+import GoBack from 'components/GoBack'
 import rankHeader from 'components/rank/rankHeader'
 import rankItem from 'components/rank/rankItem'
 import rankOfficialItem from 'components/rank/rankOfficialItem'
@@ -47,6 +49,7 @@ let specialListName = ['抖音排行榜', '云音乐古典音乐榜', '云贝推
 export default {
   name: 'Rank',
   components: {
+    GoBack,
     rankHeader,
     rankItem,
     rankOfficialItem
@@ -119,6 +122,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.rank {
+  width: 340px;
+  padding: 46px 5px 0 15px;
+}
 .top {
   display: flex;
   flex-direction: row;
