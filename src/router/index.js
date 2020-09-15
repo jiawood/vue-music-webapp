@@ -33,6 +33,7 @@ const play_list = () => import('views/PlayList/PlayList.vue')
 //player 播放列表
 // const player = () => import('views/Player/Player.vue')
 
+const search_result = () => import('views/Search/SearchResult.vue')
 
 const routes = [
   {
@@ -109,6 +110,12 @@ const routes = [
   //   path: '/player',
   //   component: player
   // }
+
+  //search的搜索结果
+  {
+    path: '/search_result/:keyword',
+    component: search_result
+  }
 ]
 
 const router = new vueRouter({

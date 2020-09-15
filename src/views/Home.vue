@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <MainTabBar></MainTabBar>
+    <MainTabBar class="sticky"></MainTabBar>
     <keep-alive>
       <router-view></router-view>
     </keep-alive>
@@ -17,3 +17,11 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+</style>

@@ -233,10 +233,9 @@ export default {
       if (!this.isMove) {
         this.currentTime = this.$refs.audio.currentTime
       }
-      console.log(1)
-      if(this.playing){
+      // console.log(1)
+      if (this.playing) {
         this.currentLyric && this.currentLyric.seek(this.currentTime * 1000)
-
       }
     },
 
@@ -275,6 +274,7 @@ export default {
       } else {
         currentIndex -= 1
       }
+      this.currentLyric.stop()
       this.$store.commit('SETCURRENTINDEX', currentIndex)
     },
     //切换播放状态
@@ -292,6 +292,7 @@ export default {
       } else {
         currentIndex += 1
       }
+      this.currentLyric.stop()
       this.$store.commit('SETCURRENTINDEX', currentIndex)
     },
 
@@ -479,6 +480,9 @@ export default {
         line-height: 40px;
         font-weight: 700;
         color: white;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
       .singer-name {
         display: inline-block;

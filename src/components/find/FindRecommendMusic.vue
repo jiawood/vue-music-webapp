@@ -2,7 +2,7 @@
   <div class="find-recommend-music">
     <div class="top">
       <slot>
-        <div class="left">大家都在听</div>
+        <div class="left">{{top}}</div>
       </slot>
       <div class="right">
         <div class="border" @click="itemClick()">
@@ -16,17 +16,18 @@
       </div>
     </div>
     <div class="content">
-      <swiper :options="songSwiperOption" class="swiper-container">
+      <swiper :options="songSwiperOption" class="swiper-container" ref="swiper">
         <swiper-slide
           v-for="(item, index) in musicData"
           :key="index"
           class="swiper-slide"
+
         >
           <div
             class="music-item"
             v-for="(item1, index1) in item"
             :key="index1"
-            @click="playSong(item1)"
+            @click="playSong(item1, index1)"
           >
             <div class="recommend-music-item">
               <div class="recommend-music-item-pic">
@@ -36,19 +37,16 @@
                   class="music-item-pic"
                 />
                 <img
-                  v-else-if="item1.album.picUrl"
-                  v-lazy="item1.album.picUrl + '?param=200y200'"
+                  v-else-if="item1.al.picUrl"
+                  v-lazy="item1.al.picUrl + '?param=200y200'"
                   class="music-item-pic"
                 />
                 <img v-else :src="pic" class="music-item-pic" />
               </div>
               <div class="music-item-text">
                 <div class="music-item-name">{{ item1.name }}</div>
-                <div class="music-item-artists" v-if="item1.artists">
-                  {{ item1.artists[0].name }}
-                </div>
-                <div class="music-item-artists" v-else-if="item1.song.artists">
-                  {{ item1.song.artists[0].name }}
+                <div class="music-item-artists" v-if="item1.ar">
+                  {{ item1.ar[0].name }}
                 </div>
               </div>
               <div class="music-item-icon">
@@ -67,7 +65,8 @@
 <script>
 export default {
   props: {
-    recommendMusicData: Array
+    recommendMusicData: Array,
+    top: String
   },
   data() {
     return {
@@ -84,23 +83,31 @@ export default {
   },
   computed: {
     musicData() {
-      const res = this.arrTrans(3, this.recommendMusicData)
+      const res = this.arrTrans(3, this.saveData)
       return res
+    },
+    saveData() {
+      return this.recommendMusicData.slice(0,9)
     }
   },
   methods: {
     arrTrans(num, arr) {
       const newArr = []
-      while (arr.length >= num) {
+      while (arr.length >= num && newArr.length < 3) {
         newArr.push(arr.splice(0, num))
       }
       return newArr
     },
     itemClick() {
-      console.log('未开发')
+      this.$store.dispatch('setPlayShow',this.recommendMusicData)
     },
     playSong(song) {
-      console.log(song)
+      // let slideIndex = this.$refs.swiper.$swiper.activeIndex
+
+      // let index = slideIndex * 3 + index1
+      let index = this.recommendMusicData.findIndex((item) => item.name == song.name)
+      this.$store.dispatch('setMiniPlayShow', this.recommendMusicData)
+      this.$store.commit('SETCURRENTINDEX', index)
     }
   }
 }
@@ -111,6 +118,7 @@ export default {
   height: 230px;
   width: 345px;
   padding-left: 15px;
+  padding-bottom: 15px;
   .top {
     height: 30px;
     width: 330px;

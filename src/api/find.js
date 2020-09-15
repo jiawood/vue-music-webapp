@@ -26,15 +26,19 @@ export function getRecommendNight() {
   })
 }
 
-
-//不需要登陆的推荐音乐
+//不需要登陆的推荐音乐,热歌的歌单
 export function recommendMusicData() {
   return request({
-    url: '/personalized/newsong'
+    url: '/playlist/detail?id=3778678'
   })
 }
 
-//不需要登录的推荐歌单
+//不需要登录的推荐音乐2 飙升榜
+export function recommendMusicData2() {
+  return request({
+    url: '/playlist/detail?id=19723756'
+  })
+}
 
 export function recommendListNo() {
   return request({
@@ -52,7 +56,6 @@ export function playlistDetail(id) {
   })
 }
 
-
 //暂时先不做这个功能
 //歌曲详情页，主要是通过这个获取到歌曲的图片
 //ids 是一个歌曲列表的字符串  id,id,id
@@ -65,7 +68,6 @@ export function songDetail(ids) {
   })
 }
 
-
 //获取音乐的MP3文件
 export function getSongUrl(id) {
   return request({
@@ -75,7 +77,6 @@ export function getSongUrl(id) {
     }
   })
 }
-
 
 //获取歌词
 export function getLyric(id) {
@@ -87,10 +88,53 @@ export function getLyric(id) {
   })
 }
 
-
 //获取排行榜数据
 export function getRankIds() {
   return request({
     url: '/toplist'
+  })
+}
+
+//获得热搜数据
+export function getSearchHot() {
+  return request({
+    url: '/search/hot/detail'
+  })
+}
+
+//默认的参数
+export function getDefaultInput() {
+  return request({
+    url: '/search/default'
+  })
+}
+
+//搜索建议,主要用来个得到歌单列表和部分歌曲
+export function getSearchSuggestion(keywords) {
+  return request({
+    url: '/search/suggest?',
+    params: {
+      keywords
+    },
+    paramsSerializer: params => {
+      // Sample implementation of query string building
+
+      return 'keywords=' + '%20' + params.keywords
+    }
+  })
+}
+
+//搜索建议，得到单曲
+export function getSearchSongs(keywords) {
+  return request({
+    url: '/search?',
+    params: {
+      keywords
+    },
+    paramsSerializer: params => {
+      // Sample implementation of query string building
+
+      return 'keywords=' + '%20' + params.keywords
+    }
   })
 }

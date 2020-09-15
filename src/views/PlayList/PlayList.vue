@@ -70,7 +70,7 @@
         v-for="(item, index) in playListDetail.tracks"
         :key="index"
       >
-        <div class="list" @click="playSong(item)">
+        <div class="list" @click="playSong(index)">
           <div class="index">
             <span>{{ index + 1 }}</span>
           </div>
@@ -86,7 +86,7 @@
               </span>
             </div>
           </div>
-          <div class="play-icon">
+          <div class="play-icon" @click="showSongDetail">
             <img :src="gThreedots" alt="" />
           </div>
         </div>
@@ -129,8 +129,11 @@ export default {
         this.$store.dispatch('setPlayShow', this.playListDetail.tracks)
       }
     },
-    playSong(song) {
-      this.$store.dispatch('setPlayShow', song)
+    playSong(index) {
+        this.$store.dispatch('setPlayShow', this.playListDetail.tracks, index)
+    },
+    showSongDetail(){
+      console.log('功能未开发')
     }
   },
   computed: {
@@ -146,7 +149,8 @@ export default {
     playlistDetail(this.$route.params.play_list_id).then(res => {
       if (res.data.code === 200) {
         this.playListDetail = res.data.playlist
-        this.$store.commit('SETPLAYLIST', res.data.playlist.tracks)
+        //res.data.playlist.tracks 这是目前的playlist
+        // this.$store.commit('SETPLAYLIST', res.data.playlist.tracks)
         this.creator = res.data.playlist.creator
       }
     })
@@ -154,8 +158,8 @@ export default {
   activated() {
     playlistDetail(this.$route.params.play_list_id).then(res => {
       if (res.data.code === 200) {
-        this.playListDetail = res.data.playlist
-        this.$store.commit('SETPLAYLIST', res.data.playlist.tracks)
+        // this.playListDetail = res.data.playlist
+        // this.$store.commit('SETPLAYLIST', res.data.playlist.tracks)
         this.creator = res.data.playlist.creator
       }
     })

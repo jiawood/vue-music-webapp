@@ -32,8 +32,11 @@ export default {
   left: 0;
   position: fixed;
   height: 46px;
+  padding: 0 15px;
+  width: 360px;
+  box-sizing: border-box;
   z-index: 10;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255);
   .icon {
     float: left;
     margin-top: 8px;
