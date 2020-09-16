@@ -57,7 +57,7 @@
 <script>
 import {getSearchSuggestion, getSearchSongs} from 'api/find'
 import SearchHeader from 'components/search/SearchHeader'
-import GoTop from 'components/Gotop'
+import GoTop from 'components/GoTop'
 export default {
   name: 'SearchResult',
   data() {
