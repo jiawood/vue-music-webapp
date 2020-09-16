@@ -50,12 +50,14 @@
         </div>
       </div>
     </div>
+    <go-top />
   </div>
 </template>
 
 <script>
 import {getSearchSuggestion, getSearchSongs} from 'api/find'
 import SearchHeader from 'components/search/SearchHeader'
+import GoTop from 'components/Gotop'
 export default {
   name: 'SearchResult',
   data() {
@@ -65,7 +67,8 @@ export default {
     }
   },
   components: {
-    SearchHeader
+    SearchHeader,
+    GoTop
   },
   computed: {
     keyword() {

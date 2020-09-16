@@ -31,7 +31,7 @@
         <div class="middle" @click="toggleLyric">
           <div class="circle" v-show="!showLyric">
             <img
-              :src="playList[currentIndex].al.picUrl"
+              :src="playList[currentIndex].al && playList[currentIndex].al.picUrl"
               alt=""
               :class="playing ? 'isPlay' : 'isPaused'"
             />
@@ -90,7 +90,7 @@
         </div>
         <div class="player-text" @click="togglePlayer">
           <div class="song-name" v-text="playList[currentIndex].name"></div>
-          <div class="singer-name" v-if="playList[currentIndex].ar.length">
+          <div class="singer-name" v-if="playList[currentIndex].ar && playList[currentIndex].ar.length">
             <template v-for="(item, index) in playList[currentIndex].ar">
               {{ playList[currentIndex].ar[index].name }}
               <template
@@ -131,9 +131,9 @@
             <div class="item-detail">
               <div class="song">
                 {{ item.name }}
-                <span class="singer">
+                <span class="singer" v-if="item.ar && item.ar[0]">
                   - {{ item.ar[0].name }}
-                  <template v-if="item.ar.length > 1"
+                  <template v-if="item.ar && item.ar.length > 1"
                     >/{{ item.ar[1].name }}</template
                   >
                   -{{ item.al.name }}
@@ -397,10 +397,10 @@ export default {
     }
   },
 
-  //页面挂载之后
-  mounted() {
-    // this.getUrl(this.songId)
-  },
+  // 页面挂载之后
+  // mounted() {
+  //   this.getUrl(this.songId)
+  // },
 
   //属性监测
   watch: {
@@ -518,6 +518,7 @@ export default {
           border-radius: 100%;
           box-shadow: 0 0 0 20px gray;
           animation: rotate 10s linear infinite;
+          display: inline-block;
 
           @keyframes rotate {
             0% {
