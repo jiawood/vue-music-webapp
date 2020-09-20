@@ -11,6 +11,7 @@
               class="item"
               v-for="(item, index) in recommendList"
               :key="index"
+              @click="goPlayList(item.id)"
             >
               <div class="playcount">{{ convertNumber(item.playCount) }}</div>
               <img :src="item.coverImgUrl" alt="" class="img" />
@@ -47,6 +48,12 @@ export default {
         return '▷' + ((num / 10000) | 0) + '万'
       }
       return '▷' + num
+    },
+    goPlayList(id) {
+      this.$router.push({
+        name: 'PlayList',
+        params: {play_list_id: id}
+      })
     }
   },
   props: {

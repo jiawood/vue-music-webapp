@@ -77,7 +77,8 @@ export default {
   },
   methods: {
     playSong(index) {
-      this.$store.dispatch('setPlayShow', this.songData, index)
+      this.$store.dispatch('setPlayShow', this.songData)
+      this.$store.commit('SETCURRENTINDEX',index)
     },
     goPlayList(id) {
       this.$router.push({
