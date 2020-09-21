@@ -77,7 +77,7 @@ export default {
   position: relative;
   .day {
     position: absolute;
-    left: 32px;
+    left: 34px;
     top: 38px;
     height: 10px;
     width: 10px;
