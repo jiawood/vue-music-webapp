@@ -2,9 +2,9 @@ import router from '../router'
 
 const action = {
   //设置播放器界面显示，参数：播放列表
-  setPlayShow({commit}, playList) {
+  setPlayShow({commit}, playList, index = 0) {
     commit('SETPLAYLIST', playList)
-    commit('SETCURRENTINDEX', 0)
+    commit('SETCURRENTINDEX', index)
     commit('SETFULLSCREEN', true)
     commit('SETPLAYING', true)
     commit('SETSHOWPLAYER', true)

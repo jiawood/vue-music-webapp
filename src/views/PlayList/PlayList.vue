@@ -125,14 +125,15 @@ export default {
       Toast(message)
     },
     playAll() {
-      if (this.playListDetail.tracks.length > 0){
+      if (this.playListDetail.tracks.length > 0) {
         this.$store.dispatch('setPlayShow', this.playListDetail.tracks)
       }
     },
     playSong(index) {
-        this.$store.dispatch('setPlayShow', this.playListDetail.tracks, index)
+      this.$store.dispatch('setPlayShow', this.playListDetail.tracks, index)
+      this.$store.commit('SETCURRENTINDEX', index)
     },
-    showSongDetail(){
+    showSongDetail() {
       console.log('功能未开发')
     }
   },
@@ -143,7 +144,6 @@ export default {
     fav() {
       return `+ Fav(${this.playListDetail.subscribedCount})`
     }
-
   },
   created() {
     playlistDetail(this.$route.params.play_list_id).then(res => {
@@ -158,7 +158,7 @@ export default {
   activated() {
     playlistDetail(this.$route.params.play_list_id).then(res => {
       if (res.data.code === 200) {
-        // this.playListDetail = res.data.playlist
+        this.playListDetail = res.data.playlist
         // this.$store.commit('SETPLAYLIST', res.data.playlist.tracks)
         this.creator = res.data.playlist.creator
       }
