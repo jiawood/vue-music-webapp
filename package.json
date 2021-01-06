@@ -9,7 +9,7 @@
     "stage": "vue-cli-service build --mode staging"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "babel-plugin-transform-remove-console": "^6.9.4",
     "core-js": "^3.6.4",
     "less-loader": "^6.1.0",
